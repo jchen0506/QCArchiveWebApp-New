@@ -148,7 +148,7 @@ $(document).ready(function () {
 				"className": 'details-control',
 				"orderable": false,
 				"data": null,
-				"defaultContent": '',
+				"defaultContent": ''
 			},
 			{ title: "Name", data: "name" },
 			{ title: "Quality", data: "theory_level" },

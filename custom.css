@@ -3,46 +3,37 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-// .icon,
-// td.details-control::before,
-// tr.shown td.details-control::before {
-// 	font-family: "FontAwesome";
-// 	font-weight: 900;
-// 	font-size: 130%;
-// 	display: inline-block;
-// 	font-style: normal;
-// 	font-variant: normal;
-// 	text-rendering: auto;
-// 	-wzipebkit-font-smoothing: antialiased;
-// }
+.icon,
+td.details-control::before,
+tr.shown td.details-control::before {
+	font-family: "FontAwesome";
+	font-weight: 900;
+	font-size: 130%;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	-wzipebkit-font-smoothing: antialiased;
+}
 
-// td.details-control::before {
-// 	content: "\f067";
-// 	color: #1a8fbf;
-// }
+td.details-control::before {
+	content: "\f067";
+	color: #1a8fbf;
+}
 
-// tr.shown td.details-control::before {
-// 	content: "\f068";
-// 	color: #b62020;
-// }
-
+tr.shown td.details-control::before {
+	content: "\f068";
+	color: #b62020;
+}
 
 div.dataTables_wrapper div.dataTables_filter {
 	width: 100%;
 	text-align: center;
 }
 
-// div.dataTables_filter {
-// 	@extend .mb-2;
-// }
-
-.dataTable {
-
-	th,
-	tr {
-		text-align: center;
-	}
-
+.dataTable th,
+.dataTable tr {
+	text-align: center;
 }
 
 .toolbar {
@@ -115,13 +106,12 @@ td.numeric {
 	border-color: #20a8d8;
 }
 
-
 .badge {
 	padding: 3px 5px;
 	font-size: 85%;
 	font-weight: 700;
-	color: black; // default
-	border: 1px solid #dee2e6 !important
+	color: black;
+	border: 1px solid #dee2e6 !important;
 }
 
 .badge-success {
@@ -148,21 +138,6 @@ td.numeric {
 .btns-cell {
 	min-width: 180px;
 }
-
-// .ui-dialog {
-// 	//extend Bootstrap modal
-// 	@extend .modal-content;
-
-
-// 	.ui-dialog-content {
-// 		@extend .modal-body;
-// 	}
-
-// 	.ui-widget-content a {
-// 		color: #20a8d8;
-// 	}
-
-// }
 
 /* Styles for custom tooltip template */
 .tooltip-head {
