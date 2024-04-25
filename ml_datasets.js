@@ -118,9 +118,6 @@ function format_elements(data, type, row, meta, full) {
 	return out;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 $(document).ready(function () {
 
 	$.ajax({

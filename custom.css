@@ -3,6 +3,31 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
+.container {
+	max-width: 1000px;
+	margin: auto;
+}
+
+.header-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+
+.logo {
+	height: 110px;
+	flex-shrink: 0;
+	margin-right: 20px;
+}
+
+.title {
+	margin: 0;
+	flex-grow: 1;
+	font-size: 24px;
+}
+
 .icon,
 td.details-control::before,
 tr.shown td.details-control::before {

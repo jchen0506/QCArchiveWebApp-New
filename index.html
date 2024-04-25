@@ -27,101 +27,97 @@
 <body>
 
 	<main role="main" style="overflow:auto">
-		<div class="jumbotron">
+		<div class="container">
 
-			<div class="container">
-
-				<div class="mb-5">
-					<div class="row justify-content-center my-5">
-						<img height="110px" src="./img/molssi.jpg" alt="The Molecular Sciences Software Institute" class="my-auto">
-						<h3 class="text-center my-auto">Machine Learning Datasets Repository</h3>
-					</div>
-
-					<table id="ds_table" class="table" style="width:100%">
-					</table>
-
-				</div>
-				<div style="display: None">
-					<div class="ds_details_template">
-						<div class="row mx-auto py-2">
-							<div class="col-md-7">
-								<div class="card h-100">
-									<div class="card-body">
-										<h5 class="card-title">Description</h5>
-										<p class="description card-text"></p>
-										<div class="card-text d-inline">
-											<span class="card-title h6 mr-2">Elements: </span>
-											<span class="elements"></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-5">
-								<div class="card text-center h-100">
-									<div class="labels card-body">
-										<h5 class="card-title">Labels</h5>
-									</div>
-									<div class="tags card-body">
-										<h5 class="card-title">Tags</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row mx-auto py-2">
-							<div class="col">
-								<div class="card h-100">
-									<div class="card-body">
-										<h5 class="card-title">Citations</h5>
-										<p class="citations card-text"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div style="display: None">
-					<div class="download_template">
-						<div class="col-auto d-inline-block">
-							<a id="hdf5" class="btn btn-sm btn-download1 mr-lg-1" href="#" target="_blank" rel="noopener"
-								data-toggle="tooltip" data-placement="top" title="?">
-								<i class="fa fa-download d-none d-lg-inline"></i> HDF5
-							</a>
-							<a id="text" class="btn btn-sm btn-download2" href="#" target="_blank" rel="noopener"
-								data-toggle="tooltip" data-placement="top" title="?">
-								<i class="fa fa-download d-none d-lg-inline"></i> Text
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div id="dialog-message" title="QCArchive">
-					<p id="msg"></p>
-				</div>
-
-				<!-- Message Modal -->
-				<div id="msg_dialog" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<form class="form-horizontal" action="#">
-								<div class="modal-header">
-									<h4 class="modal-title">QCArchive</h4>
-								</div>
-
-								<div class="modal-body">
-									<p></p>
-								</div>
-
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-
-
+			<div class="header-row justify-content-center align-items-center my-5 mb-5">
+				<img src="./img/molssi.jpg" alt="The Molecular Sciences Software Institute" class="logo my-auto">
+				<h3 class="text-center" class="title my-auto">Machine Learning Datasets Repository</h3>
 			</div>
+
+			<table id="ds_table" class="table" style="width:100%">
+			</table>
+
+			<div style="display: None">
+				<div class="ds_details_template">
+					<div class="row mx-auto py-2">
+						<div class="col-md-7">
+							<div class="card h-100">
+								<div class="card-body">
+									<h5 class="card-title">Description</h5>
+									<p class="description card-text"></p>
+									<div class="card-text d-inline">
+										<span class="card-title h6 mr-2">Elements: </span>
+										<span class="elements"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="card text-center h-100">
+								<div class="labels card-body">
+									<h5 class="card-title">Labels</h5>
+								</div>
+								<div class="tags card-body">
+									<h5 class="card-title">Tags</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mx-auto py-2">
+						<div class="col">
+							<div class="card h-100">
+								<div class="card-body">
+									<h5 class="card-title">Citations</h5>
+									<p class="citations card-text"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="display: None">
+				<div class="download_template">
+					<div class="col-auto d-inline-block">
+						<a id="hdf5" class="btn btn-sm btn-download1 mr-lg-1" href="#" target="_blank" rel="noopener"
+							data-toggle="tooltip" data-placement="top" title="?">
+							<i class="fa fa-download d-none d-lg-inline"></i> HDF5
+						</a>
+						<a id="text" class="btn btn-sm btn-download2" href="#" target="_blank" rel="noopener" data-toggle="tooltip"
+							data-placement="top" title="?">
+							<i class="fa fa-download d-none d-lg-inline"></i> Text
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="dialog-message" title="QCArchive">
+				<p id="msg"></p>
+			</div>
+
+			<!-- Message Modal -->
+			<div id="msg_dialog" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form class="form-horizontal" action="#">
+							<div class="modal-header">
+								<h4 class="modal-title">QCArchive</h4>
+							</div>
+
+							<div class="modal-body">
+								<p></p>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
 	</main>
 
 	<!-- Boostrap 5 -->
