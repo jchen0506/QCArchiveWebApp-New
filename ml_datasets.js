@@ -130,11 +130,21 @@ $(document).ready(function () {
 
 	var table = $('#ds_table').DataTable({
 
-		dom: 'f <"toolbar"> r <t> i p',  // 'f l r <t> i p'
-		searching: true,
+		// dom: 'f <"toolbar"> r <t> i p',  
+		layout: {
+			topStart: function () {
+				let toolbar = document.createElement('div');
+				toolbar.className = 'toolbar';
+				return toolbar;
+			},
+			topEnd: 'search',
+			bottomStart: 'info',
+			bottomEnd: 'paging'
+		},
+		// searching: true,
 		pageLength: 12,
 		ordering: true,
-		paging: true,
+		// paging: true,
 		order: [[1, 'asc']], // column #1
 		//compact: true,  // styles classes not here
 
@@ -222,7 +232,7 @@ $(document).ready(function () {
 
 	$('#add_your_ds').click(function (e) {
 		e.preventDefault();
-
+		console.log('add your dataset clicked');
 		var msg = "To add your Machine Learning Dataset, please "
 			+ "email us at <a class='card-link' href='mailto:qcarchive@molssi.org'>qcarchive@molssi.org</a>.";
 

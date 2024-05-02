@@ -51,7 +51,7 @@ tr.shown td.details-control::before {
 	color: #b62020;
 }
 
-div.dataTables_wrapper div.dataTables_filter {
+div.dataTables_wrapper div.dt-search {
 	width: 100%;
 	text-align: center;
 }
