@@ -237,8 +237,10 @@ $(document).ready(function () {
 			+ "email us at <a class='card-link' href='mailto:qcarchive@molssi.org'>qcarchive@molssi.org</a>.";
 
 		$('#msg_dialog .modal-body p').html(msg);
-		$('#msg_dialog').modal();
+		var myModal = new bootstrap.Modal(document.getElementById('msg_dialog'));
+		myModal.show();
 	});
+
 
 	$('#license').click(function (e) {
 		e.preventDefault();
@@ -248,7 +250,8 @@ $(document).ready(function () {
 			+ "Creative Commons 4.0 Attribution </a> license.";
 
 		$('#msg_dialog .modal-body p').html(msg);
-		$('#msg_dialog').modal();
+		var myModal = new bootstrap.Modal(document.getElementById('msg_dialog'));
+		myModal.show();
 
 	});
 
