@@ -38,58 +38,26 @@ function format_details(data) {
 	return details;
 }
 
-function get_download_size(data) {
-	/**
-	 * Placeholder until Zenodo update their APIs to get the size
-	 * efficiently
-	 */
-
-	if (!data.view_url_hdf5 & !data.view_url_plaintext)
-		return;
-	var rec_url, text_url, hdf5_url;
-	text_url = data.view_url_plaintext ? data.view_url_plaintext.split('/files/') : null;
-	hdf5_url = data.view_url_hdf5 ? data.view_url_hdf5.split('/files/') : null;
-
-	rec_url = text_url ? text_url[0] : hdf5_url[0];
-	rec_url = rec_url.split('/record/')[1];
-	text_url = text_url ? text_url[1].split('?')[0] : null;
-	hdf5_url = hdf5_url ? hdf5_url[1].split('?')[0] : null;
-
-	var url = 'https://zenodo.org/api/records/' + rec_url;
-
-	console.log(url, text_url, hdf5_url);
-
-	var zenodo_rec = $.ajax({
-		url: url,
-		// timeout: 500,  // msec
-	}).done(function (ret) {
-		console.log(ret);
-	});
-
-}
-
 function format_buttons(data, type, row, meta) {
-
-	var buttons = $('.download_template').clone();
-	buttons.removeClass('download_template');
-
-	if (!data.view_url_hdf5) {
-		buttons.find('#hdf5').remove();
-	}
-	else {
-		buttons.find('#hdf5').attr('href', data.view_url_hdf5);
-		buttons.find('#hdf5').attr('title', data.hdf5_size + ' MB');
+	if (!data.view_url_hdf5 && !data.view_url_plaintext) {
+		return ''; // Return an empty string if there are no download links
 	}
 
-	if (!data.view_url_plaintext) {
-		buttons.find('#text').remove();
-	}
-	else {
-		buttons.find('#text').attr('href', data.view_url_plaintext);
-		buttons.find('#text').attr('title', data.plaintext_size + ' MB');
+	var dropdownId = 'dropdown-' + meta.row;
+	var dropdown = $('<div class="dropdown"></div>');
+	var button = $('<button class="btn btn-link dropdown-toggle" type="button" id="' + dropdownId + '" data-bs-toggle="dropdown" aria-expanded="false">Download</button>');
+	var menu = $('<ul class="dropdown-menu" aria-labelledby="' + dropdownId + '"></ul>');
+
+	if (data.view_url_hdf5) {
+		menu.append('<li><a class="dropdown-item" href="' + data.view_url_hdf5 + '" target="_blank" rel="noopener">HDF5 (' + data.hdf5_size + ' MB)</a></li>');
 	}
 
-	return buttons.html();
+	if (data.view_url_plaintext) {
+		menu.append('<li><a class="dropdown-item" href="' + data.view_url_plaintext + '" target="_blank" rel="noopener">Text (' + data.plaintext_size + ' MB)</a></li>');
+	}
+
+	dropdown.append(button).append(menu);
+	return dropdown[0].outerHTML;
 }
 
 function format_elements(data, type, row, meta, full) {
@@ -118,9 +86,6 @@ function format_elements(data, type, row, meta, full) {
 	return out;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 $(document).ready(function () {
 
 	$.ajax({
@@ -133,11 +98,21 @@ $(document).ready(function () {
 
 	var table = $('#ds_table').DataTable({
 
-		dom: 'f <"toolbar"> r <t> i p',  // 'f l r <t> i p'
-		searching: true,
+		// dom: 'f <"toolbar"> r <t> i p',  
+		layout: {
+			topStart: function () {
+				let toolbar = document.createElement('div');
+				toolbar.className = 'toolbar';
+				return toolbar;
+			},
+			topEnd: 'search',
+			bottomStart: 'info',
+			bottomEnd: 'paging'
+		},
+		// searching: true,
 		pageLength: 12,
 		ordering: true,
-		paging: true,
+		// paging: true,
 		order: [[1, 'asc']], // column #1
 		//compact: true,  // styles classes not here
 
@@ -148,7 +123,7 @@ $(document).ready(function () {
 				"className": 'details-control',
 				"orderable": false,
 				"data": null,
-				"defaultContent": '',
+				"defaultContent": ''
 			},
 			{ title: "Name", data: "name" },
 			{ title: "Quality", data: "theory_level" },
@@ -166,23 +141,12 @@ $(document).ready(function () {
 		],
 
 		"drawCallback": function (settings) {
-			$('[data-toggle="tooltip"]').tooltip({
-				template:
-					'<div class="tooltip">' +
-					'<div class="tooltip-arrow"></div>' +
-					'<div class="tooltip-head">' +
-					'<b><i class="fa fa-info-circle"></i> Download Size: </b>' +
-					'</div>' +
-					'<div class="tooltip-inner"></div>' +
-					'</div>',
-				html: true,
+			// Initialize dropdowns
+			var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+			var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+				return new bootstrap.Dropdown(dropdownToggleEl);
 			});
 		},
-
-		// dom: 'Bfrtip',
-		// buttons: [
-		//     'copy', 'excel', 'pdf'
-		// ]
 
 	});
 
@@ -225,13 +189,15 @@ $(document).ready(function () {
 
 	$('#add_your_ds').click(function (e) {
 		e.preventDefault();
-
+		console.log('add your dataset clicked');
 		var msg = "To add your Machine Learning Dataset, please "
 			+ "email us at <a class='card-link' href='mailto:qcarchive@molssi.org'>qcarchive@molssi.org</a>.";
 
 		$('#msg_dialog .modal-body p').html(msg);
-		$('#msg_dialog').modal();
+		var myModal = new bootstrap.Modal(document.getElementById('msg_dialog'));
+		myModal.show();
 	});
+
 
 	$('#license').click(function (e) {
 		e.preventDefault();
@@ -241,7 +207,8 @@ $(document).ready(function () {
 			+ "Creative Commons 4.0 Attribution </a> license.";
 
 		$('#msg_dialog .modal-body p').html(msg);
-		$('#msg_dialog').modal();
+		var myModal = new bootstrap.Modal(document.getElementById('msg_dialog'));
+		myModal.show();
 
 	});
 
