@@ -87,22 +87,36 @@ div.dataTables_wrapper div.dt-search {
 	margin: 5px;
 }
 
-.btn-download1,
-.btn-download1:visited,
-.btn-download1:focus {
-	color: #fff;
-	background-color: #1a8fbf;
-	border-color: #1a8fbf;
-	float: left;
+/* Make the button more subtle and transparent */
+.btn-link {
+	color: inherit;
+	text-decoration: none;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	font-weight: normal;
 }
 
-.btn-download2,
-btn-download2:visited .btn-download2:visited,
-.btn-download2:focus {
-	color: #fff;
-	background-color: #b62020;
-	border-color: #b62020;
-	float: right;
+.btn-link:hover,
+.btn-link:focus {
+	color: inherit;
+	text-decoration: underline;
+}
+
+/* Style the dropdown menu */
+.dropdown-menu {
+	min-width: 100%;
+	border: 1px solid #dee2e6;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+	text-align: center;
+	padding: 0.5rem 1rem;
+}
+
+.btns-cell {
+	min-width: 120px;
 }
 
 div.dataTables_paginate ul.pagination {

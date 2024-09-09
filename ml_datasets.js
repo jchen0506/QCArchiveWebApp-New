@@ -69,27 +69,25 @@ function get_download_size(data) {
 }
 
 function format_buttons(data, type, row, meta) {
-
-	var buttons = $('.download_template').clone();
-	buttons.removeClass('download_template');
-
-	if (!data.view_url_hdf5) {
-		buttons.find('#hdf5').remove();
-	}
-	else {
-		buttons.find('#hdf5').attr('href', data.view_url_hdf5);
-		buttons.find('#hdf5').attr('title', data.hdf5_size + ' MB');
+	if (!data.view_url_hdf5 && !data.view_url_plaintext) {
+		return ''; // Return an empty string if there are no download links
 	}
 
-	if (!data.view_url_plaintext) {
-		buttons.find('#text').remove();
-	}
-	else {
-		buttons.find('#text').attr('href', data.view_url_plaintext);
-		buttons.find('#text').attr('title', data.plaintext_size + ' MB');
+	var dropdownId = 'dropdown-' + meta.row;
+	var dropdown = $('<div class="dropdown"></div>');
+	var button = $('<button class="btn btn-link dropdown-toggle" type="button" id="' + dropdownId + '" data-bs-toggle="dropdown" aria-expanded="false">Download</button>');
+	var menu = $('<ul class="dropdown-menu" aria-labelledby="' + dropdownId + '"></ul>');
+
+	if (data.view_url_hdf5) {
+		menu.append('<li><a class="dropdown-item" href="' + data.view_url_hdf5 + '" target="_blank" rel="noopener">HDF5 (' + data.hdf5_size + ' MB)</a></li>');
 	}
 
-	return buttons.html();
+	if (data.view_url_plaintext) {
+		menu.append('<li><a class="dropdown-item" href="' + data.view_url_plaintext + '" target="_blank" rel="noopener">Text (' + data.plaintext_size + ' MB)</a></li>');
+	}
+
+	dropdown.append(button).append(menu);
+	return dropdown[0].outerHTML;
 }
 
 function format_elements(data, type, row, meta, full) {
@@ -173,23 +171,12 @@ $(document).ready(function () {
 		],
 
 		"drawCallback": function (settings) {
-			$('[data-toggle="tooltip"]').tooltip({
-				template:
-					'<div class="tooltip">' +
-					'<div class="tooltip-arrow"></div>' +
-					'<div class="tooltip-head">' +
-					'<b><i class="fa fa-info-circle"></i> Download Size: </b>' +
-					'</div>' +
-					'<div class="tooltip-inner"></div>' +
-					'</div>',
-				html: true,
+			// Initialize dropdowns
+			var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+			var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+				return new bootstrap.Dropdown(dropdownToggleEl);
 			});
 		},
-
-		// dom: 'Bfrtip',
-		// buttons: [
-		//     'copy', 'excel', 'pdf'
-		// ]
 
 	});
 
