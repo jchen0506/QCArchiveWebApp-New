@@ -39,6 +39,7 @@ tr.shown td.details-control::before {
 	font-variant: normal;
 	text-rendering: auto;
 	-wzipebkit-font-smoothing: antialiased;
+	cursor: pointer;
 }
 
 td.details-control::before {
@@ -179,7 +180,7 @@ td.numeric {
 }
 
 /* Styles for custom tooltip template */
-.tooltip-head {
+/* .tooltip-head {
 	color: #fff !important;
 	background: #000;
 	padding: 10px 10px 5px;
@@ -187,8 +188,10 @@ td.numeric {
 	text-align: center;
 	margin-bottom: -2px;
 	/* Hide default tooltip rounded corner from top */
-}
+/* }
 
 .tooltip-head .glyphicon {
 	vertical-align: bottom;
 }
+
+*/

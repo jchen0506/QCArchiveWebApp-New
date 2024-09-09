@@ -38,36 +38,6 @@ function format_details(data) {
 	return details;
 }
 
-function get_download_size(data) {
-	/**
-	 * Placeholder until Zenodo update their APIs to get the size
-	 * efficiently
-	 */
-
-	if (!data.view_url_hdf5 & !data.view_url_plaintext)
-		return;
-	var rec_url, text_url, hdf5_url;
-	text_url = data.view_url_plaintext ? data.view_url_plaintext.split('/files/') : null;
-	hdf5_url = data.view_url_hdf5 ? data.view_url_hdf5.split('/files/') : null;
-
-	rec_url = text_url ? text_url[0] : hdf5_url[0];
-	rec_url = rec_url.split('/record/')[1];
-	text_url = text_url ? text_url[1].split('?')[0] : null;
-	hdf5_url = hdf5_url ? hdf5_url[1].split('?')[0] : null;
-
-	var url = 'https://zenodo.org/api/records/' + rec_url;
-
-	console.log(url, text_url, hdf5_url);
-
-	var zenodo_rec = $.ajax({
-		url: url,
-		// timeout: 500,  // msec
-	}).done(function (ret) {
-		console.log(ret);
-	});
-
-}
-
 function format_buttons(data, type, row, meta) {
 	if (!data.view_url_hdf5 && !data.view_url_plaintext) {
 		return ''; // Return an empty string if there are no download links
